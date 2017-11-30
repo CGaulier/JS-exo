@@ -1,25 +1,32 @@
-"use strict";
+'use strict';
 
 /*
 Requête asynchrone en ES6
-Fonction fetch() plus le systeme de Promise
+Fonction fetch() plus le système de Promise
 */
 
-//La fonction fetch() prend en parametre l'adresse de l'API (flux)
-fetch("http://digitalworkshop.fr/wp-json/wp/v2/posts").then(function (data) {
-    //Vérifie la présence de données dans la requete
+// La fonction fetch() prend en paramètre l'adresse de l'API
+fetch('http://digitalworkshop.fr/wp-json/wp/v2/posts').then(function (data) {
+    // Vérifier la présence de données dans la réponse de la requête
     if (data.ok) {
-        //La donnée est présentes => integrer le systeme de Promise
+        // Les données sont présentes => renvoyer une Promise de type 'resolve'
         return Promise.resolve(data);
     } else {
-        return Promise.reject(new Error("Mange tes \xE9pinars gros connard"));
+        // Les données sont présentes => renvoyer une Promise de type 'reject'
+        return Promise.reject(new Error('Problème dans la requête'));
     }
 }).then(
-//Renvoyer la réponse
+// Renvoyer la réponse
 function (data) {
-    return data.json;
-}).then(function (data) {
+    return data.json();
+}
+
+// Afficher les données dans la console   
+).then(function (data) {
     return console.log(data);
-}).catch(function (err) {
-    console.log(err);
+})
+
+// Afficher l'erreur
+.catch(function (err) {
+    return console.log(err);
 });
