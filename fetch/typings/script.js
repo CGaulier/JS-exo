@@ -1,3 +1,9 @@
+//Déclaration de variables
+
+let articleList = document.querySelector(`#articleList`);
+const apiUrl = `http://digitalworkshop.fr/wp-json/wp/v2/posts`;
+
+
 /*
 Requête asynchrone en ES6
 Fonction fetch() plus le système de Promise
@@ -5,7 +11,7 @@ Fonction fetch() plus le système de Promise
 
 
 // La fonction fetch() prend en paramètre l'adresse de l'API
-fetch(`http://digitalworkshop.fr/wp-json/wp/v2/posts`).then(data => {
+fetch(apiUrl).then(data => {
     // Vérifier la présence de données dans la réponse de la requête
   if (data.ok) {
     // Les données sont présentes => renvoyer une Promise de type 'resolve'
@@ -22,10 +28,36 @@ fetch(`http://digitalworkshop.fr/wp-json/wp/v2/posts`).then(data => {
 
 
  // Afficher les données dans la console   
-).then(data => console.log(data))
+).then(data => appendHtmlTags(data))
 
 
     // Afficher l'erreur
 .catch((err) => console.log(err));
 
 // ZBLEH MA VIE
+
+//Créer ses fonctions pour traiter les données et les afficher
+
+const appendHtmlTags = dataFronRequest =>{
+    //le parametre est un tableau je fais un for ES6
+    for(let item of dataFronRequest){
+        //Afficher dans la console : le titre, l'exerpt, le lien
+       /* console.log(item.title.rendered)
+        console.log(item.link)
+        console.log(item.excerpt.rendered)
+        console.log (`---`)*/
+
+
+        //Créer un article avec le contenu et l'ajouter dans le DOM
+        creatArticle(item);
+    }
+}
+const creatArticle = (itemFromIteration) =>{
+    articleList.innerHTML +=`
+    <article>
+        <h3>${itemFromIteration.title.rendered}</h3>
+        <div>${itemFromIteration.excerpt.rendered}</div>
+        <p><a href="${itemFromIteration.link}" target="_blank">Voir l'article</a></p>
+    </article>
+    `
+}
