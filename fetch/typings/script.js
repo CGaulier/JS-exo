@@ -20,10 +20,12 @@ fetch(`http://digitalworkshop.fr/wp-json/wp/v2/posts`).then(data => {
     // Renvoyer la réponse
     data => data.json()
 
-    
+
  // Afficher les données dans la console   
 ).then(data => console.log(data))
 
 
     // Afficher l'erreur
 .catch((err) => console.log(err));
+
+// ZBLEH MA VIE
