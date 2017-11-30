@@ -1,3 +1,9 @@
+// Attendre le chargement du DOM pour executer le code Javascript
+
+document.addEventListener(`DOMContentLoaded`,()=> {
+
+
+
 //Déclaration de variables
 
 let articleList = document.querySelector(`#articleList`);
@@ -8,7 +14,7 @@ const apiUrl = `http://digitalworkshop.fr/wp-json/wp/v2/posts`;
 Requête asynchrone en ES6
 Fonction fetch() plus le système de Promise
 */
-
+const asyncLoadFunction = theApiUrl =>{
 
 // La fonction fetch() prend en paramètre l'adresse de l'API
 fetch(apiUrl).then(data => {
@@ -33,7 +39,7 @@ fetch(apiUrl).then(data => {
 
     // Afficher l'erreur
 .catch((err) => console.log(err));
-
+}
 // ZBLEH MA VIE
 
 //Créer ses fonctions pour traiter les données et les afficher
@@ -47,12 +53,12 @@ const appendHtmlTags = dataFronRequest =>{
         console.log(item.excerpt.rendered)
         console.log (`---`)*/
 
-
-        //Créer un article avec le contenu et l'ajouter dans le DOM
+        //creatArticle va afficher mes infos
         creatArticle(item);
     }
 }
 const creatArticle = (itemFromIteration) =>{
+    if(itemFromIteration.title.rendered !=`test`){ 
     articleList.innerHTML +=`
     <article>
         <h3>${itemFromIteration.title.rendered}</h3>
@@ -60,4 +66,13 @@ const creatArticle = (itemFromIteration) =>{
         <p><a href="${itemFromIteration.link}" target="_blank">Voir l'article</a></p>
     </article>
     `
+    }
 }
+
+//Lancer la requete
+
+asyncLoadFunction(apiUrl);
+
+
+//fin de la fonction qui charge le DOM (la première ligne de code en gros)
+});
