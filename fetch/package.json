@@ -1,0 +1,14 @@
+{
+  "name": "fetch",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "babel --no-babelrc typings -w -d js --presets=env"
+  },
+  "author": "ClemenceG",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
